@@ -14,7 +14,8 @@ pub fn main() !void {
 
     c.SetTargetFPS(60);
 
-    const day1_part1_answer = try day1.solvePart1(c_alloc);
+    //const day1_part1_answer = try day1.solvePart1(c_alloc);
+    const day1_part2_answer = try day1.solvePart2(c_alloc);
 
     while (!c.WindowShouldClose()) {
         {
@@ -22,7 +23,7 @@ pub fn main() !void {
             defer c.EndDrawing();
 
             c.ClearBackground(c.RAYWHITE);
-            c.DrawText(day1_part1_answer, 190, 200, 20, c.LIGHTGRAY);
+            c.DrawText(day1_part2_answer, 190, 200, 20, c.LIGHTGRAY);
         }
     }
 }
