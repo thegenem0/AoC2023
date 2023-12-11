@@ -1,9 +1,12 @@
 const std = @import("std");
+const day1 = @import("day1.zig");
 const c = @cImport(
     @cInclude("raylib.h"),
 );
 
 pub fn main() !void {
+    const c_alloc = std.heap.c_allocator;
+
     c.InitWindow(1080, 720, "AoC-2023");
     defer c.CloseWindow();
 
@@ -11,13 +14,15 @@ pub fn main() !void {
 
     c.SetTargetFPS(60);
 
+    const day1_part1_answer = try day1.solvePart1(c_alloc);
+
     while (!c.WindowShouldClose()) {
         {
             c.BeginDrawing();
             defer c.EndDrawing();
 
             c.ClearBackground(c.RAYWHITE);
-            c.DrawText("Congrats! You created your first window!", 190, 200, 20, c.LIGHTGRAY);
+            c.DrawText(day1_part1_answer, 190, 200, 20, c.LIGHTGRAY);
         }
     }
 }
