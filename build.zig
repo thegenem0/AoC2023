@@ -8,7 +8,6 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{});
 
     //Build Libraries
-    const raylib = raylib_build.addRaylib(b, target, optimize, .{});
 
     const exe = b.addExecutable(.{
         .name = "AoC2023",
@@ -17,14 +16,10 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    //Link Libraries
+    //Link Raylib
+    const raylib = raylib_build.addRaylib(b, target, optimize, .{});
+    exe.addIncludePath(.{ .path = "libs/raylib/src" });
     exe.linkLibrary(raylib);
-    // exe.linkSystemLibrary("GL");
-    // exe.linkSystemLibrary("rt");
-    // exe.linkSystemLibrary("dl");
-    // exe.linkSystemLibrary("m");
-    // exe.linkSystemLibrary("X11");
-    // exe.linkLibC();
 
     b.installArtifact(exe);
 
